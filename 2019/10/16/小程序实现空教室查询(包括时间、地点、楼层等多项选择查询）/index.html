@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Elaine</title>
+  <title>小程序实现空教室查询(包括时间、地点、楼层等多项选择查询） | Elaine</title>
   
   
 
@@ -259,7 +259,7 @@
   
     <h1 class="title">
       <a href="/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/">
-        2019-10-16
+        小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）
       </a>
     </h1>
   
@@ -334,8 +334,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <hr>
-<h2 id="title：-小程序实现空教室查询-包括时间、地点、楼层等多项选择查询）"><a href="#title：-小程序实现空教室查询-包括时间、地点、楼层等多项选择查询）" class="headerlink" title="title： 小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）"></a>title： 小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）</h2><p>效果图如下：</p>
+        <p>效果图如下：</p>
 <p><img src="https://img-blog.csdnimg.cn/20190604064222193.png" style="width:40%;height:auto;"><br><img src="https://img-blog.csdnimg.cn/20190604064304511.png" alt="在这里插入图片描述"></p>
 <p>wxml部分：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">bindsubmit</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--获得周查询的值--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"section"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date"</span>&gt;</span>日期选择：<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">mode</span>=<span class="string">"multiSelector"</span> <span class="attr">bindchange</span>=<span class="string">"bindMultiPickerChange"</span> <span class="attr">bindcolumnchange</span>=<span class="string">"bindMultiPickerColumnChange"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;multiIndex&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;multiArray&#125;&#125;"</span> <span class="attr">name</span>=<span class="string">"starTitle"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date_picker"</span>&gt;</span></span><br><span class="line">        当前查询:&#123;&#123;multiArray[0][multiIndex[0]]&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">'/images/down.png'</span> <span class="attr">style</span>=<span class="string">'width:20rpx;height:22rpx;'</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">        &#123;&#123;multiArray[1][multiIndex[1]]&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--时间查询--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"section"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date"</span>&gt;</span>时间选择：<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">bindchange</span>=<span class="string">"bindPickerChange"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;index&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;array&#125;&#125;"</span> <span class="attr">name</span>=<span class="string">"timeke"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date_picker"</span>&gt;</span></span><br><span class="line">        当前选择：&#123;&#123;array[index]&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--地点查询--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"section"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date"</span>&gt;</span>地点查询：<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">bindchange</span>=<span class="string">"bindPickerChange2"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;objectIndex&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;objectArray&#125;&#125;"</span> <span class="attr">range-key</span>=<span class="string">"name"</span> <span class="attr">name</span>=<span class="string">"adress"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date_picker"</span>&gt;</span></span><br><span class="line">        当前选择：&#123;&#123;objectArray[objectIndex].name&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 楼层查询 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"section"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date"</span>&gt;</span>楼层选择：<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">picker</span> <span class="attr">bindchange</span>=<span class="string">"bindPickerChange3"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;numberindex&#125;&#125;"</span> <span class="attr">range</span>=<span class="string">"&#123;&#123;numberarray&#125;&#125;"</span> <span class="attr">name</span>=<span class="string">"floor"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"date_picker"</span>&gt;</span></span><br><span class="line">        当前选择：&#123;&#123;numberarray[numberindex]&#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 查询结果 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">'chaxun'</span> <span class="attr">form-type</span>=<span class="string">"submit"</span>&gt;</span>点击查询<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"classroom"</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;chaxunResult&#125;&#125;"</span>&gt;</span>&#123;&#123;chaxunResult&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -357,7 +356,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-16T19:42:50+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-16T19:44:17+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
     <p>更新于 2019年10月16日</p>
@@ -379,7 +378,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title= | Elaine&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title=小程序实现空教室查询(包括时间、地点、楼层等多项选择查询） | Elaine&summary="
           
           >
           
@@ -391,7 +390,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title= | Elaine&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title=小程序实现空教室查询(包括时间、地点、楼层等多项选择查询） | Elaine&summary="
           
           >
           
@@ -403,7 +402,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title= | Elaine&summary="
+          href="http://service.weibo.com/share/share.php?url=https://huanyueyue.cn/2019/10/16/小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）/&title=小程序实现空教室查询(包括时间、地点、楼层等多项选择查询） | Elaine&summary="
           
           >
           
@@ -466,7 +465,7 @@
 
   <script>
     window.subData = {
-      title: '',
+      title: '小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）',
       tools: true
     }
   </script>
@@ -555,20 +554,6 @@
           
             
               
-  <section class='widget toc-wrapper'>
-    
-<header class='pure'>
-  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
-  
-    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer" href="javascript:void(0)"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
-  
-</header>
-
-    <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title：-小程序实现空教室查询-包括时间、地点、楼层等多项选择查询）"><span class="toc-text">title： 小程序实现空教室查询(包括时间、地点、楼层等多项选择查询）</span></a></li></ol>
-    </div>
-  </section>
-
 
             
           
