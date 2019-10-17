@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>执行hexo d部署到github出错 | Elaine</title>
+  <title>CSS花式旋转图片小demo | Elaine</title>
   
   
 
@@ -258,8 +258,8 @@
         
   
     <h1 class="title">
-      <a href="/2019/10/15/执行hexo d部署到github出错/">
-        执行hexo d部署到github出错
+      <a href="/2018/04/27/css动态花式图片旋转效果小demo/">
+        CSS花式旋转图片小demo
       </a>
     </h1>
   
@@ -290,7 +290,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-    <p>2019-10-15</p>
+    <p>2018-04-27</p>
   </a>
 </div>
 
@@ -298,6 +298,14 @@
         
           
             
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/hexo/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>hexo</p>
+    </a>
+  </div>
+
 
           
         
@@ -334,7 +342,12 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>我的github已经配置了ssh key 并且执行$ ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>能连接到github，但是在我执行hexo d想要将博客部署到github却出错了。利用<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 访问本地发现已经部署上去了，但是github上并没有同步。好气哦，把域名的http换成https都不行。<br><img src="https://img-blog.csdnimg.cn/20191015201328696.png" alt="在这里插入图片描述"><br><strong>解决办法</strong><br>在站点的根目录下面的_config.yml文件里面，找到# site这一段增加一行：<br><code>email: 你的邮箱地址</code> 注意冒号后要有一个空格，然后这个邮箱要是你github绑定的邮箱。就像下面这样：<br><img src="https://img-blog.csdnimg.cn/20191015201958619.png" alt="在这里插入图片描述"></p>
+        <p>效果样式：<img src="https://img-blog.csdnimg.cn/20190903122226861.gif" alt="在这里插入图片描述"><br>&emsp;&amp;emsp:这个效果主要是运用cssCSS的<code>rotate()</code>函数进行旋转而不变形的转换。将图片旋转的固定点设定为右上角。<br>话不多说，上代码：<br>&emsp;&emsp; <strong>html部分</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/1.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/2.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/1.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/2.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/1.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/2.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>css部分</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">    <span class="selector-tag">div</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">160px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">300px</span> auto;</span><br><span class="line">        <span class="attribute">position</span>: relative;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>:<span class="number">20px</span>;</span><br><span class="line">        <span class="attribute">position</span>: absolute;</span><br><span class="line">        <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">        <span class="attribute">transition</span>: all <span class="number">0.6s</span>;</span><br><span class="line">        <span class="attribute">transform-origin</span>: top right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(60deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(120deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(3)</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(180deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(4)</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(240deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(5)</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(300deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">img</span><span class="selector-pseudo">:nth-child(6)</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
 
       </div>
       
@@ -346,10 +359,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-15T20:37:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-17T18:16:36+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年10月15日</p>
+    <p>更新于 2019年10月17日</p>
   </a>
 </div>
 
@@ -357,6 +370,9 @@
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-tag" aria-hidden="true"></i><p>linux</p></a></div>
+
 
         
       
@@ -368,7 +384,7 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanyueyue.cn/2019/10/15/执行hexo d部署到github出错/&title=执行hexo d部署到github出错 | Elaine&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanyueyue.cn/2018/04/27/css动态花式图片旋转效果小demo/&title=CSS花式旋转图片小demo | Elaine&summary="
           
           >
           
@@ -380,7 +396,7 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://huanyueyue.cn/2019/10/15/执行hexo d部署到github出错/&title=执行hexo d部署到github出错 | Elaine&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://huanyueyue.cn/2018/04/27/css动态花式图片旋转效果小demo/&title=CSS花式旋转图片小demo | Elaine&summary="
           
           >
           
@@ -392,7 +408,7 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://huanyueyue.cn/2019/10/15/执行hexo d部署到github出错/&title=执行hexo d部署到github出错 | Elaine&summary="
+          href="http://service.weibo.com/share/share.php?url=https://huanyueyue.cn/2018/04/27/css动态花式图片旋转效果小demo/&title=CSS花式旋转图片小demo | Elaine&summary="
           
           >
           
@@ -420,9 +436,9 @@
                       <span class="art-item-left">
                           <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
                           <h4>
-                              <a href="/2019/10/15/解决使用hexo deploy命令之后自定义域名失效的问题/" rel="prev" title="解决使用hexo deploy命令之后自定义域名失效的问题">
+                              <a href="/2019/10/06/常用浏览器总结/" rel="prev" title="常用的浏览器总结">
                                 
-                                    解决使用hexo deploy命令之后自定义域名失效的问题
+                                    常用的浏览器总结
                                 
                               </a>
                           </h4>
@@ -430,20 +446,6 @@
                       </span>
                   </section>
               
-              
-                  <section class="next">
-                      <span class="art-item-right" aria-hidden="true">
-                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
-                          <h4>
-                              <a href="/2019/10/15/MockJS中的随机函数/" rel="prev" title="MockJS中的随机函数">
-                                  
-                                      MockJS中的随机函数
-                                  
-                              </a>
-                          </h4>
-                          
-                      </span>
-                  </section>
               
           </div>
       
@@ -469,7 +471,7 @@
 
   <script>
     window.subData = {
-      title: '执行hexo d部署到github出错',
+      title: 'CSS花式旋转图片小demo',
       tools: true
     }
   </script>
