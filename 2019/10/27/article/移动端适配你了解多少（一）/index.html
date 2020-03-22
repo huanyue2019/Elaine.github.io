@@ -359,7 +359,7 @@
 <li><strong>rem布局</strong><pre><code>*CSS3媒体查询适配
 基于设计图的rem布局
 基于屏幕百分比的rem布局
-小程序的rpx布局*</code></pre></li>
+微信小程序的rpx布局*</code></pre></li>
 <li><strong>vw布局</strong></li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">（<span class="number">1</span>）通过媒体查询的方式即CSS3的meida queries</span><br><span class="line">（<span class="number">2</span>）以天猫首页为代表的 flex 弹性布局</span><br><span class="line">（<span class="number">3</span>）以淘宝首页为代表的 rem+viewport缩放</span><br><span class="line">（<span class="number">4</span>）rem 方式</span><br></pre></td></tr></table></figure>
@@ -417,8 +417,8 @@
 <li>需要确定父级的大小，因为要根据父级的大小进行计算 各个属性中如果使用百分比，相对父元素的属性并不是唯一的</li>
 <li>高度不好设置，一般需要固定高度</li>
 </ul>
-<h5 id="4-小程序的rpx布局"><a href="#4-小程序的rpx布局" class="headerlink" title="4. 小程序的rpx布局"></a>4. 小程序的rpx布局</h5><p>&emsp;&emsp;小程序有个<code>rpx</code>可以根据屏幕自适应。官方文档的介绍：<strong>可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则<code>750rpx = 375px = 750</code>物理像素，<code>1rpx = 0.5px = 1物理像素</code></strong>，也就是说，它内部的实现原理其实和基于设计图的rem布局的原理差不多。</p>
-<p>&emsp;&emsp;只不过小程序内部处理了一下，<strong>让rpx直接能够根据屏幕宽度自适应</strong>，而不是像rem那样依赖于根元素的font-size.</p>
+<h5 id="4-微信小程序的rpx布局"><a href="#4-微信小程序的rpx布局" class="headerlink" title="4. 微信小程序的rpx布局"></a>4. 微信小程序的rpx布局</h5><p>&emsp;&emsp;微信小程序有个<code>rpx</code>可以根据屏幕自适应。官方文档的介绍：<strong>可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则<code>750rpx = 375px = 750</code>物理像素，<code>1rpx = 0.5px = 1物理像素</code></strong>，也就是说，它内部的实现原理其实和基于设计图的rem布局的原理差不多。</p>
+<p>&emsp;&emsp;只不过微信小程序内部处理了一下，<strong>让rpx直接能够根据屏幕宽度自适应</strong>，而不是像rem那样依赖于根元素的font-size.</p>
 <h4 id="三、VM布局"><a href="#三、VM布局" class="headerlink" title="三、VM布局"></a>三、VM布局</h4><p>css3中引入与视口有关的新的单位vw和vh，vw表示相对于视口的宽度，vh表示相对于视口高度。<br><img src="https://img-blog.csdnimg.cn/20191027140414154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODkzNjI1,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>那么问题来了，平时我们拿到的设计图都是基于<code>px</code>标记的，怎么将<code>px</code>转为<code>vw</code>呢？<br><strong>vw单位换算</strong>：视口宽度为100vw占满整个视口区域，那么1vw相当于占整个视口宽度的1%，所以<code>1px= 1/375*100 vw</code><br>所有的页面元素都可以直接进行计算换算成vw单位，但是这样计算和百分比方案计算比较类似，都会比较麻烦。<br>但是有一个比较厉害的插件—— <a href="https://github.com/evrone/postcss-px-to-viewport" target="_blank" rel="noopener"><strong>postcss-px-to-viewport</strong></a>，可以预处理css,将px单位转换为vw单位，但是需要进行一些相关的webpack配置。详情可看上方链接官方配置解释。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    loader: <span class="string">'postcss-loader'</span>,</span><br><span class="line">    options: &#123;</span><br><span class="line">    	plugins: <span class="function"><span class="params">()</span>=&gt;</span>[</span><br><span class="line">        	<span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)(&#123;</span><br><span class="line">        		browsers: [<span class="string">'last 5 versions'</span>]</span><br><span class="line">        	&#125;),</span><br><span class="line">        	<span class="built_in">require</span>(<span class="string">'postcss-px-to-viewport'</span>)(&#123;</span><br><span class="line">        		viewportWidth: <span class="number">375</span>,</span><br><span class="line">        		viewportHeight: <span class="number">1334</span>,</span><br><span class="line">        		unitPrecision: <span class="number">3</span>,</span><br><span class="line">        		viewportUnit: <span class="string">'vw'</span>,</span><br><span class="line">        		selectorBlackList: [<span class="string">'.ignore'</span>, <span class="string">'.hairlines'</span>],</span><br><span class="line">                minPixelValue: <span class="number">1</span>,</span><br><span class="line">                mediaQuery: <span class="literal">false</span></span><br><span class="line">        	&#125;)</span><br><span class="line">    	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -444,10 +444,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-03T21:32:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-03-22T12:27:15+08:00">
   <a class='notlink'>
     <i class="fas fa-clock" aria-hidden="true"></i>
-    <p>更新于 2019年11月3日</p>
+    <p>更新于 2020年3月22日</p>
   </a>
 </div>
 
@@ -682,7 +682,7 @@
 </header>
 
     <div class='content pure'>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一、px-viewport适配"><span class="toc-text">一、px + viewport适配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、rem布局"><span class="toc-text">二、rem布局</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-CSS3媒体查询适配-meida-queries"><span class="toc-text">1.CSS3媒体查询适配 meida queries</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-基于设计图的rem布局"><span class="toc-text">2.基于设计图的rem布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-基于屏幕百分比的rem布局"><span class="toc-text">3.基于屏幕百分比的rem布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-小程序的rpx布局"><span class="toc-text">4. 小程序的rpx布局</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、VM布局"><span class="toc-text">三、VM布局</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一、px-viewport适配"><span class="toc-text">一、px + viewport适配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、rem布局"><span class="toc-text">二、rem布局</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-CSS3媒体查询适配-meida-queries"><span class="toc-text">1.CSS3媒体查询适配 meida queries</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-基于设计图的rem布局"><span class="toc-text">2.基于设计图的rem布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-基于屏幕百分比的rem布局"><span class="toc-text">3.基于屏幕百分比的rem布局</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-微信小程序的rpx布局"><span class="toc-text">4. 微信小程序的rpx布局</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三、VM布局"><span class="toc-text">三、VM布局</span></a></li></ol>
     </div>
   </section>
 
@@ -821,11 +821,13 @@
         
           <li><a class="flat-box child" title="/categories/学习笔记/小知识点/" href="/categories/学习笔记/小知识点/"><div class='name'>小知识点</div><div class='badge'>(7)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/学习笔记/小程序/" href="/categories/学习笔记/小程序/"><div class='name'>小程序</div><div class='badge'>(1)</div></a></li>
+          <li><a class="flat-box child" title="/categories/学习笔记/微信小程序/" href="/categories/学习笔记/微信小程序/"><div class='name'>微信小程序</div><div class='badge'>(1)</div></a></li>
         
-          <li><a class="flat-box" title="/categories/数据结构与算法/" href="/categories/数据结构与算法/"><div class='name'>数据结构与算法</div><div class='badge'>(7)</div></a></li>
+          <li><a class="flat-box" title="/categories/数据结构与算法/" href="/categories/数据结构与算法/"><div class='name'>数据结构与算法</div><div class='badge'>(6)</div></a></li>
         
-          <li><a class="flat-box child" title="/categories/数据结构与算法/剑指offer，数组/" href="/categories/数据结构与算法/剑指offer，数组/"><div class='name'>剑指offer，数组</div><div class='badge'>(5)</div></a></li>
+          <li><a class="flat-box child" title="/categories/数据结构与算法/剑指offer，数组/" href="/categories/数据结构与算法/剑指offer，数组/"><div class='name'>剑指offer，数组</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/算法/" href="/categories/算法/"><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
         
       </ul>
     </div>
@@ -876,7 +878,7 @@
 </header>
 
     <div class='content pure'>
-      <a href="/tags/CSS/" style="font-size: 16px; color: #8b8b8b">CSS</a> <a href="/tags/JavaScript/" style="font-size: 22px; color: #636363">JavaScript</a> <a href="/tags/Vue/" style="font-size: 18px; color: #7e7e7e">Vue</a> <a href="/tags/hexo/" style="font-size: 18px; color: #7e7e7e">hexo</a> <a href="/tags/node/" style="font-size: 14px; color: #999">node</a> <a href="/tags/剑指offer/" style="font-size: 20px; color: #707070">剑指offer</a> <a href="/tags/学习笔记/" style="font-size: 20px; color: #707070">学习笔记</a> <a href="/tags/小tips/" style="font-size: 24px; color: #555">小tips</a> <a href="/tags/小程序/" style="font-size: 14px; color: #999">小程序</a> <a href="/tags/算法/" style="font-size: 24px; color: #555">算法</a>
+      <a href="/tags/CSS/" style="font-size: 16.5px; color: #888">CSS</a> <a href="/tags/JavaScript/" style="font-size: 21.5px; color: #666">JavaScript</a> <a href="/tags/Vue/" style="font-size: 19px; color: #777">Vue</a> <a href="/tags/hexo/" style="font-size: 19px; color: #777">hexo</a> <a href="/tags/node/" style="font-size: 14px; color: #999">node</a> <a href="/tags/剑指offer/" style="font-size: 21.5px; color: #666">剑指offer</a> <a href="/tags/学习笔记/" style="font-size: 19px; color: #777">学习笔记</a> <a href="/tags/小tips/" style="font-size: 24px; color: #555">小tips</a> <a href="/tags/微信小程序/" style="font-size: 14px; color: #999">微信小程序</a> <a href="/tags/算法/" style="font-size: 24px; color: #555">算法</a>
     </div>
   </section>
 
